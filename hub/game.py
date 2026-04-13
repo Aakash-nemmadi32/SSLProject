@@ -13,7 +13,10 @@ class Game:
         self.player2 = player2
         self.n = n
         self.curplayer = player1
+<<<<<<< HEAD
     
+=======
+>>>>>>> origin/main
 #assigning the usernames given as arguments as the players of game 
 player1 = sys.argv[1]
 player2 = sys.argv[2]
