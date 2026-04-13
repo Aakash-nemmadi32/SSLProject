@@ -13,6 +13,7 @@ class Game:
         self.player2 = player2
         self.n = n
         self.curplayer = player1
+    
 #assigning the usernames given as arguments as the players of game 
 player1 = sys.argv[1]
 player2 = sys.argv[2]
@@ -87,16 +88,25 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_pos = pygame.mouse.get_pos()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            
 
-            if tictac_rect.collidepoint(mouse_pos):
-                print("TicTacToe selected")
+            if tictac_rect.collidepoint(event.pos):
+                pygame.quit()
+                game=tictac()
+                game.play()
+                pygame.display.update()
 
-            elif othello_rect.collidepoint(mouse_pos):
-                print("Othello selected")
+            elif othello_rect.collidepoint(event.pos):
+                pygame.quit()
+                game=othello()
+                game.play()
+                pygame.display.update()
 
-            elif connect4_rect.collidepoint(mouse_pos):
-                print("Connect4 selected")
+            elif connect4_rect.collidepoint(event.pos):
+                pygame.quit()
+                game=connect4()
+                game.play()
+                pygame.display.update()
 
 pygame.quit()
