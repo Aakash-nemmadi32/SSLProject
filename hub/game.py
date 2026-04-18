@@ -5,6 +5,7 @@ import pathlib
 import time
 import os
 import sys
+import importlib
 from games.base_game_class import Game
 #assigning the usernames given as arguments as the players of game 
 player1 = sys.argv[1]
@@ -36,19 +37,17 @@ while running:
             mouse_pos = pygame.mouse.get_pos()
 
             if tic_rect.collidepoint(mouse_pos):
-                pygame.quit()
-                os.system("python games/tictactoe.py")
-                sys.exit()
-
+                module = importlib.import_module("games.tictactoe")
+                game = module.TicTacToe(player1,player2)
+                game.run()
             elif oth_rect.collidepoint(mouse_pos):
-                pygame.quit()
-                os.system("python games/othello.py")
-                sys.exit()
-
+                module = importlib.import_module("games.othello")
+                game = module.Othello(player1,player2)
+                game.run()
             elif con_rect.collidepoint(mouse_pos):
-                pygame.quit()
-                os.system("python games/connect4.py")
-                sys.exit()
+                module = importlib.import_module("games.connect4")
+                game = module.Connect4(player1,player2)
+                game.run()
 
     pygame.display.update()
 
