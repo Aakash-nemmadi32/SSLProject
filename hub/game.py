@@ -7,6 +7,9 @@ import os
 import sys
 import importlib
 from games.base_game_class import Game
+from games.tictactoe import TicTacToe
+from games.othello import Othello
+#from games.connect4 import Connect4
 #assigning the usernames given as arguments as the players of game 
 player1 = sys.argv[1]
 player2 = sys.argv[2]
@@ -33,10 +36,14 @@ while running:
             running = False
 
         if event.type == pygame.MOUSEBUTTONDOWN:
-            print(pygame.mouse.get_pos())
+            #print(pygame.mouse.get_pos())
             mouse_pos = pygame.mouse.get_pos()
 
             if tic_rect.collidepoint(mouse_pos):
+                #pygame.quit()
+                #t=TicTacToe(1,2)
+                #t.run()
+                #sys.exit()
                 module = importlib.import_module("games.tictactoe")
                 game = module.TicTacToe(player1,player2)
                 game.run()
@@ -48,7 +55,6 @@ while running:
                 module = importlib.import_module("games.connect4")
                 game = module.Connect4(player1,player2)
                 game.run()
-
     pygame.display.update()
 
 pygame.quit()

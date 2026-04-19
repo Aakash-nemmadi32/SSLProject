@@ -1,5 +1,5 @@
 
-from base_game_class import Game
+from .base_game_class import Game
 import numpy as np
 import pygame
 from sys import exit
