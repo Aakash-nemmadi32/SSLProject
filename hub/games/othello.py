@@ -1,5 +1,4 @@
 import numpy as np
-from numpy.lib.stride_tricks import sliding_window_view
 import pygame
 import sys
 from .base_game_class import Game
