@@ -113,54 +113,34 @@ class Othello(Game):
                         if np.all((arr != 0) & (arr != self.current_player)):
                             t= True
                             break
-            if r >= 2 and c >= 2 or r <= 5 and c <= 5:
-                if r >= c:
-                    g = r
-                else:
-                    g = c
-                for i in range (2,1+r+c-g,1):
-                    if self.board[r-i,c-i] == self.current_player:
-                        a = True
-                        for j in range(1,i,1):
-                            if self.board[r-i+j,c-i+j] == 0 or self.board[r-i+j,c-i+j] == self.current_player:
-                                a = False
-                                break
-                        if a:
-                            t = True
-                            break                        
-                for i in range (2,8-g,1):
-                    if self.board[r+i,c+i] == self.current_player:
-                        b = True
-                        for j in range(1,i,1):
-                            if self.board[r+j,c+j] == 0 or self.board[r+j,c+j] == self.current_player:
-                                b = False
-                                break
-                        if b:
+            if r >= 2 and c >= 2 and r <= 5 and c <= 5:
+                arr1 = np.where(np.diag(self.board, c - r) == self.current_player)[0]
+                for i in range(len(arr1)):
+                    if arr1[i] < r:
+                        arr = np.diag(self.board, c - r)[arr1[i]+1:r:1]
+                        if np.all((arr != 0) & (arr != self.current_player)):
                             t = True
                             break
-                if r+c >= 8:
-                    g = c
-                else:
-                    g = r
-                for i in range (2,6-g,1):
-                    if self.board[r-i,c+i] == self.current_player:
-                        d = True
-                        for j in range(1,i,1):
-                            if self.board[r-j,c+j] == 0 or self.board[r-j,c+j] == self.current_player:
-                                d = False
-                                break
-                        if d:
+                    elif arr1[i] == r:
+                        continue
+                    else:
+                        arr = np.diag(self.board, c - r)[r+1:arr1[i]:1]
+                        if np.all((arr != 0) & (arr != self.current_player)):
+                            t= True
+                            break
+                arr1 = np.where(np.diag(np.fliplr(self.board), (8 - c) - r) == self.current_player)[0]
+                for i in range(len(arr1)):
+                    if arr1[i] < r:
+                        arr = np.diag(np.fliplr(self.board), (8 - c) - r)[arr1[i]+1:r:1]
+                        if np.all((arr != 0) & (arr != self.current_player)):
                             t = True
                             break
-                for i in range (2,r+c+1-g,1):
-                    if self.board[r+i,c-i] == self.current_player:
-                        e = True
-                        for j in range(1,i,1):
-                            if self.board[r+j,c-j] == 0 or self.board[r+j,c-j] == self.current_player:
-                                e = False
-                                break
-                        if e:
-                            t = True
+                    elif arr1[i] == r:
+                        continue
+                    else:
+                        arr = np.diag(np.fliplr(self.board), (8 - c) - r)[r+1:arr1[i]:1]
+                        if np.all((arr != 0) & (arr != self.current_player)):
+                            t= True
                             break
             return t
         else:
@@ -171,7 +151,8 @@ class Othello(Game):
                 return True
             else:
                 return False
-        return False
+        else:
+            return False
     def show_result(self):
         overlay = pygame.Surface((self.width,self.height))
         overlay.fill((135,206,250))
