@@ -20,7 +20,13 @@ class Othello(Game):
         self.START_X = 19   
         self.START_Y = 19
         self.game_over = False
+        self.player1no = 2
+        self.player2no = 2
         self.create_board(8,8)
+        self.board[3,3] = 2
+        self.board[4,4] = 2
+        self.board[3,4] = 1
+        self.board[4,3] = 1
     def draw_board(self):
         pygame.init()
         self.screen.blit(self.game_screen,(0,0))
@@ -28,23 +34,15 @@ class Othello(Game):
         for x in range(19,622,86):
             for y in range(19,622,86):
                 pygame.draw.rect(self.game_screen,darkgreen,(x,y,80,80),0,-1)
-        pygame.draw.circle(self.game_screen,(255,255,255),(317,317),39,width=0)
-        pygame.draw.circle(self.game_screen,(255,255,255),(403,403),39,width=0)
-        pygame.draw.circle(self.game_screen,(0,0,0),(317,403),39,width=0)
-        pygame.draw.circle(self.game_screen,(0,0,0),(403,317),39,width=0)
-        pygame.draw.circle(self.game_screen,(128,128,128),(317,317),39,width=6)
-        pygame.draw.circle(self.game_screen,(128,128,128),(403,403),39,width=6)
-        pygame.draw.circle(self.game_screen,(128,128,128),(317,403),39,width=6)
-        pygame.draw.circle(self.game_screen,(128,128,128),(403,317),39,width=6)
         for r in range(8):
             for c in range(8):
                 x_pos = self.START_X + c * self.STEP + self.CELL_SIZE//2
                 y_pos = self.START_Y + r * self.STEP + self.CELL_SIZE//2
                 if self.board[r, c] == 1:
-                    pygame.draw.circle(self.game_screen,(255,255,255),(x_pos,y_pos),39,width=0)
+                    pygame.draw.circle(self.game_screen,(0,0,0),(x_pos,y_pos),39,width=0)
                     pygame.draw.circle(self.game_screen,(128,128,128),(x_pos,y_pos), 39,width=6)
                 elif self.board[r, c] == 2:
-                    pygame.draw.circle(self.game_screen,(0,0,0),(x_pos,y_pos),39,width=0)
+                    pygame.draw.circle(self.game_screen,(255,255,255),(x_pos,y_pos),39,width=0)
                     pygame.draw.circle(self.game_screen,(128,128,128),(x_pos,y_pos), 39,width=6)
     def make_move(self):
         position = self.position_in_table()
@@ -53,12 +51,16 @@ class Othello(Game):
         
         r = position[0]
         c = position[1]
-        if self.board[r, c] == 0 :   
+        if self.check_validity(r,c):   
             self.board[r, c] = self.current_player
+            if self.current_player == self.player1:
+                self.player1no += 1
+            else:
+                self.player2no += 1
             if self.check_win(self.current_player):
                 self.game_over = True
-            if not self.game_over:
-                self.switch_turn()
+        else:
+            self.switch_turn()
     def position_in_table(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT :
@@ -78,7 +80,97 @@ class Othello(Game):
                         valid_y_max_col = valid_y_min_col + self.CELL_SIZE
                         if valid_x_min_row < mx < valid_x_max_row and valid_y_min_col < my < valid_y_max_col:
                             return [r, c]
+    def check_validity(self,r,c):
+        if self.board[r, c] == 0:
+            t = False
+            if c >= 2 or c <= 5:
+                arr1 = np.where(self.board[r] == self.current_player)[0]
+                for i in range(len(arr1)):
+                    if arr1[i] < c:
+                        arr = self.board[r,arr1[i]+1:c:1]
+                        if np.all((arr != 0) & (arr != self.current_player)):
+                            t = True
+                            break
+                    elif arr1[i] == c:
+                        continue
+                    else:
+                        arr = self.board[r,c+1:arr1[i]:1]
+                        if np.all((arr != 0) & (arr != self.current_player)):
+                            t= True
+                            break
+            if r >= 2 or r <= 5:
+                arr1 = np.where(self.board[:,c] == self.current_player)[0]
+                for i in range(len(arr1)):
+                    if arr1[i] < r:
+                        arr = self.board[arr1[i]+1:r,c:1]
+                        if np.all((arr != 0) & (arr != self.current_player)):
+                            t = True
+                            break
+                    elif arr1[i] == r:
+                        continue
+                    else:
+                        arr = self.board[r+1:arr1[i],c:1]
+                        if np.all((arr != 0) & (arr != self.current_player)):
+                            t= True
+                            break
+            if r >= 2 and c >= 2 or r <= 5 and c <= 5:
+                if r >= c:
+                    g = r
+                else:
+                    g = c
+                for i in range (2,1+r+c-g,1):
+                    if self.board[r-i,c-i] == self.current_player:
+                        a = True
+                        for j in range(1,i,1):
+                            if self.board[r-i+j,c-i+j] == 0 or self.board[r-i+j,c-i+j] == self.current_player:
+                                a = False
+                                break
+                        if a:
+                            t = True
+                            break                        
+                for i in range (2,8-g,1):
+                    if self.board[r+i,c+i] == self.current_player:
+                        b = True
+                        for j in range(1,i,1):
+                            if self.board[r+j,c+j] == 0 or self.board[r+j,c+j] == self.current_player:
+                                b = False
+                                break
+                        if b:
+                            t = True
+                            break
+                if r+c >= 8:
+                    g = c
+                else:
+                    g = r
+                for i in range (2,6-g,1):
+                    if self.board[r-i,c+i] == self.current_player:
+                        d = True
+                        for j in range(1,i,1):
+                            if self.board[r-j,c+j] == 0 or self.board[r-j,c+j] == self.current_player:
+                                d = False
+                                break
+                        if d:
+                            t = True
+                            break
+                for i in range (2,r+c+1-g,1):
+                    if self.board[r+i,c-i] == self.current_player:
+                        e = True
+                        for j in range(1,i,1):
+                            if self.board[r+j,c-j] == 0 or self.board[r+j,c-j] == self.current_player:
+                                e = False
+                                break
+                        if e:
+                            t = True
+                            break
+            return t
+        else:
+            return False
     def check_win(self, player):
+        if np.all(self.board != 0):
+            if self.tilenumber(self.current_player) > 32:
+                return True
+            else:
+                return False
         return False
     def show_result(self):
         overlay = pygame.Surface((self.width,self.height))

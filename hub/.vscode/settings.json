@@ -6,6 +6,7 @@
         "darkgreen",
         "gamescreen",
         "MOUSEBUTTONDOWN",
-        "tictactoe"
+        "tictactoe",
+        "tilenumber"
     ]
 }
