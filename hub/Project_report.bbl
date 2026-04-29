@@ -1,0 +1,35 @@
+\begin{thebibliography}{1}
+
+\bibitem{matplotlib_tutorial}
+{Matplotlib Developers}.
+\newblock Matplotlib tutorials, 2026.
+
+\bibitem{numpy_docs}
+{NumPy Developers}.
+\newblock Numpy reference documentation, 2026.
+
+\bibitem{pygame_docs}
+{Pygame Community}.
+\newblock Pygame documentation, 2026.
+
+\bibitem{python_tutorial}
+{Python Software Foundation}.
+\newblock The python tutorial, 2026.
+
+\bibitem{w3schools_numpy_reference}
+{W3Schools}.
+\newblock Numpy reference, 2026.
+
+\bibitem{w3schools_numpy_tutorial}
+{W3Schools}.
+\newblock Numpy tutorial, 2026.
+
+\bibitem{w3schools_python_reference}
+{W3Schools}.
+\newblock Python reference, 2026.
+
+\bibitem{w3schools_python_tutorial}
+{W3Schools}.
+\newblock Python tutorial, 2026.
+
+\end{thebibliography}
