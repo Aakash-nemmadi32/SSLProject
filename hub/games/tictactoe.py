@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 
 from games.base_game_class import Game
 
-=======
-from games.base_game_class import Game
->>>>>>> dc28f013d8adb75ac8adffe4393b055f97b0a613
 import numpy as np
 import pygame
 from sys import exit

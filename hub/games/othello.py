@@ -2,10 +2,6 @@
 from games.base_game_class import Game
 import numpy as np
 import pygame
-<<<<<<< HEAD
-
-=======
->>>>>>> dc28f013d8adb75ac8adffe4393b055f97b0a613
 from sys import exit
 import csv
 from datetime import date
