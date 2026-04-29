@@ -120,3 +120,5 @@ echo "========================================================"
 echo ""
 echo "Othello"
 print_table othello
+rm *.txt
+rm connect4.csv tictactoe.csv othello.csv
