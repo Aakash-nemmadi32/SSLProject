@@ -121,7 +121,7 @@ class connect4(Game):
                     self.game_over = True
                 elif not np.any(self.board == 0):   # board full, no winner
                     self.game_over = True
-                self.is_draw = True      
+                    self.is_draw = True      
                 if not self.game_over:
                     self.switch_turn()
                 break   # piece placed, stop looking further down

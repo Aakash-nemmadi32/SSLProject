@@ -270,7 +270,7 @@ class othello(Game):
 
                 if not self.result_saved:
                     winner_name = self.player1 if winner == 1 else self.player2
-                    loser_name  = self.player1 if winner == 2 else self.player2
+                    loser_name  = self.player2 if winner == 1 else self.player1
 
                     # Show the final board briefly before recording the result
                     self.draw_board()
