@@ -162,10 +162,6 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
-<<<<<<< HEAD
-
-=======
->>>>>>> dc28f013d8adb75ac8adffe4393b055f97b0a613
 
             # ---- menu screen clicks ----
             if  not game_started:
