@@ -1,0 +1,52 @@
+\contentsline {section}{\numberline {1}External Libraries, \\python modules and their usage in project}{3}{}%
+\contentsline {subsection}{\numberline {1.1}List of libraries}{3}{}%
+\contentsline {subsection}{\numberline {1.2}List of python modules}{3}{}%
+\contentsline {subsection}{\numberline {1.3}Usage of Libraries}{3}{}%
+\contentsline {subsection}{\numberline {1.4}Usage of built-in python modules}{4}{}%
+\contentsline {section}{\numberline {2}Features of the game hub}{4}{}%
+\contentsline {subsection}{\numberline {2.1}Menu}{4}{}%
+\contentsline {subsection}{\numberline {2.2}Games in Mini Game Hub}{4}{}%
+\contentsline {subsection}{\numberline {2.3}TicTacToe Game}{5}{}%
+\contentsline {subsection}{\numberline {2.4}Othello(reversi) Game}{6}{}%
+\contentsline {subsection}{\numberline {2.5}ConnectFour Game}{7}{}%
+\contentsline {subsection}{\numberline {2.6}Game over menu}{7}{}%
+\contentsline {subsection}{\numberline {2.7}Sort By Menu}{8}{}%
+\contentsline {subsection}{\numberline {2.8}Statistics}{9}{}%
+\contentsline {section}{\numberline {3}Code Logic and implementation }{9}{}%
+\contentsline {subsection}{\numberline {3.1}TicTacToe}{9}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}Overview}{9}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}Board Representation}{10}{}%
+\contentsline {subsubsection}{\numberline {3.1.3}Rendering the Board}{10}{}%
+\contentsline {subsubsection}{\numberline {3.1.4}Move Handling}{11}{}%
+\contentsline {subsubsection}{\numberline {3.1.5}Win Detection Logic}{11}{}%
+\contentsline {subsubsection}{\numberline {3.1.6}Game Loop}{12}{}%
+\contentsline {subsubsection}{\numberline {3.1.7}Result Storage}{12}{}%
+\contentsline {subsubsection}{\numberline {3.1.8}Conclusion}{12}{}%
+\contentsline {subsection}{\numberline {3.2}Othello}{13}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}Overview}{13}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}Board Representation}{13}{}%
+\contentsline {subsubsection}{\numberline {3.2.3}Initial Setup}{13}{}%
+\contentsline {subsubsection}{\numberline {3.2.4}Direction-Based Move Logic}{13}{}%
+\contentsline {subsubsection}{\numberline {3.2.5}Valid Move and Flip Detection}{13}{}%
+\contentsline {subsubsection}{\numberline {3.2.6}Valid Moves Generation}{14}{}%
+\contentsline {subsubsection}{\numberline {3.2.7}Move Execution}{14}{}%
+\contentsline {subsubsection}{\numberline {3.2.8}Win Condition Logic}{14}{}%
+\contentsline {subsubsection}{\numberline {3.2.9}User Interaction Handling}{14}{}%
+\contentsline {subsubsection}{\numberline {3.2.10}Game Loop}{15}{}%
+\contentsline {subsubsection}{\numberline {3.2.11}Result Storage}{15}{}%
+\contentsline {subsubsection}{\numberline {3.2.12}Conclusion}{15}{}%
+\contentsline {subsection}{\numberline {3.3}Connect4}{15}{}%
+\contentsline {subsubsection}{\numberline {3.3.1}Overview}{15}{}%
+\contentsline {subsubsection}{\numberline {3.3.2}Board Representation}{15}{}%
+\contentsline {subsubsection}{\numberline {3.3.3}Rendering the Board}{16}{}%
+\contentsline {subsubsection}{\numberline {3.3.4}Column Selection Logic}{16}{}%
+\contentsline {subsubsection}{\numberline {3.3.5}Move Execution}{16}{}%
+\contentsline {subsubsection}{\numberline {3.3.6}Win Detection Logic}{17}{}%
+\contentsline {subsubsection}{\numberline {3.3.7}Game Loop}{17}{}%
+\contentsline {subsubsection}{\numberline {3.3.8}Result Handling}{17}{}%
+\contentsline {subsubsection}{\numberline {3.3.9}Conclusion}{17}{}%
+\contentsline {section}{\numberline {4}Hurdles, issues faced \\during the project and overcoming them}{18}{}%
+\contentsline {subsection}{\numberline {4.1}Hurdles}{18}{}%
+\contentsline {subsection}{\numberline {4.2}Overcoming the hurdles}{18}{}%
+\contentsline {section}{\numberline {5}Possible project improvements \\if extra time is permitted/alloted}{19}{}%
+\contentsline {section}{\numberline {6}References}{19}{}%
