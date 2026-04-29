@@ -1,4 +1,4 @@
-Main = Project_report
+Main = report
 all: $(Main).pdf
 $(Main).pdf: $(Main).tex
 	pdflatex $(Main)
