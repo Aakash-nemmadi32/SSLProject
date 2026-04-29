@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-from abc import abstractmethod
 
-from .base_game_class import Game
-=======
 from games.base_game_class import Game
->>>>>>> Harshith
+
 import numpy as np
 import pygame
 from sys import exit
