@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "cSpell.words": [
         "abstractmethod",
@@ -25,4 +26,16 @@
         "tictactoe",
         "tilenumber"
     ]
+=======
+{
+    "cSpell.words": [
+        "blit",
+        "collidepoint",
+        "coloum",
+        "darkgreen",
+        "gamescreen",
+        "MOUSEBUTTONDOWN",
+        "tictactoe"
+    ]
+>>>>>>> 9311f2bd7d422e87d3d8b5953608a368215f6848
 }
