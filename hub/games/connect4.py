@@ -169,3 +169,4 @@ class connect4(Game):
         
             pygame.display.update() 
             clock.tick(60) 
+

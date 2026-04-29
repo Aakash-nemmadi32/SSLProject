@@ -1,3 +1,4 @@
+
 import pygame
 import numpy as np
 import pathlib
@@ -72,7 +73,7 @@ def statistic_page():
     )
     
     screen.blit(statistics_surface, (0, 0))
- 
+
 
 # player names passed in from command line
 
@@ -161,7 +162,10 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
+<<<<<<< HEAD
 
+=======
+>>>>>>> dc28f013d8adb75ac8adffe4393b055f97b0a613
 
             # ---- menu screen clicks ----
             if  not game_started:
