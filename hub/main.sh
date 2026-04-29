@@ -94,7 +94,7 @@ while (( attempts_for_password_1 > 0 )) ; do
         while (( attempts_for_password_2 > 0 )) ; do
             if authentication_user "$player2" "$password2" ; then
                 # both players authenticated — launch the game
-                python game.py "$player1" "$player2"
+                python3 game.py "$player1" "$player2"
                 exit 0
             else
                 echo "incoorect password"
