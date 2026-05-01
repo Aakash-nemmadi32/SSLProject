@@ -19,9 +19,11 @@ def menu_page():
     pygame.draw.rect(screen, (0,255,100), (200,200,200,50), width=2)   # tictactoe button
     pygame.draw.rect(screen, (255,50,50), (200,300,200,50), width=2)   # othello button
     pygame.draw.rect(screen, (150,0,255), (200,400,200,50), width=2)   # connect4 button
+    pygame.draw.rect(screen, (150,0,255), (200,500,200,50), width=2 )
     screen.blit(text_tictactoe, (215,215))
     screen.blit(text_othello, (215,315))
     screen.blit(text_connect4, (215,415))
+    screen.blit(text_mode,(215,515))
 
 # shows the game over screen with winner name and options to continue
 def game_over_page():
@@ -74,7 +76,18 @@ def statistic_page():
     
     screen.blit(statistics_surface, (0, 0))
 
+def mode_page():
+        mode_surface.fill("black")
 
+        pygame.draw.rect(mode_surface, (0,255,100), (170,220,300,55), width=2)   # leaderboard
+        pygame.draw.rect(mode_surface, (255,50,50), (170,300,300,55), width=2)   # statistics
+        pygame.draw.rect(mode_surface, (150,0,255), (170,380,300,55), width=2)   # restart
+        mode_surface.blit(text_small, (205,235))
+        mode_surface.blit(text_medium, (215,315))
+        mode_surface.blit(text_large, (235,395))
+        screen.blit(mode_surface, (0,0)) 
+    
+    
 # player names passed in from command line
 
 player1 = sys.argv[1]
@@ -93,11 +106,13 @@ font_small = pygame.font.Font("PressStart2P-Regular.ttf",20)
 text_tictactoe = font_small.render("TicTacToe",True,(0,255,255))
 text_connect4 = font_small.render("Connect4",True,(0,255,255))
 text_othello = font_small.render("Othello",True,(0,255,255))
+text_mode = font_small.render("Mode",True,(0,255,255))
 
 # ------ menu button rects ------
 tic_rect = pygame.Rect(200, 200, 200, 50)
 oth_rect = pygame.Rect(200, 300, 200, 50)
 con_rect = pygame.Rect(200, 400, 200, 50)
+mode_rect = pygame.Rect(200, 500, 200 ,50)
 
 # ------ game over screen setup ------
 exit_surface = pygame.Surface((640,640))
@@ -136,6 +151,16 @@ statistics_surface = pygame.Surface((640,640))
 text_back_sta = font_small.render("Back",True,(255,255,255))
 back_sta_rect = pygame.Rect(290, 570, 300, 55) 
 
+small_rect = pygame.Rect(170, 220, 300, 55)
+medium_rect = pygame.Rect(170, 300, 300, 55)
+large_rect = pygame.Rect(170, 380, 300, 55)
+text_small = font_small.render("small",True,(0,255,255))
+text_medium = font_small.render("medium",True,(0,255,255))
+text_large = font_small.render("large",True,(0,255,255))
+mode_surface = pygame.Surface((640,640))
+
+
+
 
 running = True
 
@@ -144,11 +169,15 @@ game_started = False
 game_over = False
 leader_board_clicked = False
 statistic_show = False
+mode_show = False
 
 while running:
     # decide which screen to draw based on current state
     if  not game_started:
         menu_page()
+    elif mode_show:
+        mode_page()
+            
     elif statistic_show:           
         statistic_page()
     elif game_over and not leader_board_clicked:
@@ -168,7 +197,7 @@ while running:
                 if tic_rect.collidepoint(mouse_pos):
                     current_game = "tictactoe"
                     game_started = True
-                    t = TicTacToe(player1,player2,screen)
+                    t = TicTacToe(player1,player2,screen,10)
                     winner = t.run()
                     if winner == "Menu":
                         # user quit back to menu mid-game
@@ -183,25 +212,14 @@ while running:
                     game_over = True                          
 
                 elif oth_rect.collidepoint(mouse_pos):
-                    current_game = "othello"
                     game_started = True
-                    t = othello(player1,player2,screen)
-                    winner = t.run()
-                    if winner == "Menu":
-                        game_started = False
-                        game_over = False
-                        leader_board_clicked = False
-                        statistic_show = False
-                    elif winner == "Draw":
-                        text_winner = font_winner.render("It's a Draw!", True, (0,255,200))
-                    else:
-                        text_winner = font_winner.render(f"{winner} Wins!", True, (0,255,200))
-                    game_over = True
+                    mode_show = True
+
 
                 elif con_rect.collidepoint(mouse_pos):
                     current_game = "connect4"
                     game_started = True
-                    t = connect4(player1,player2,screen)
+                    t = connect4(player1,player2,screen,7)
                     winner = t.run()
                     if winner == "Menu":
                         game_started = False
@@ -230,11 +248,11 @@ while running:
                     # restart the same game that was just played
                     game_over = False
                     if current_game == "tictactoe":
-                        t = TicTacToe(player1,player2,screen)
+                        t = TicTacToe(player1,player2,screen,10)
                     elif current_game == "othello":
-                        t = othello(player1,player2,screen)
+                        t = othello(player1,player2,screen,10)
                     else:
-                        t = connect4(player1,player2,screen)
+                        t = connect4(player1,player2,screen,7)
 
                     winner = t.run()
                     text_winner = font_winner.render(f"{winner} Wins!", True, (0,255,200))
@@ -255,6 +273,58 @@ while running:
                     game_started = False
                     game_over = False
                     leader_board_clicked = False
+            
+            elif mode_show:
+                if small_rect.collidepoint(mouse_pos):
+                    current_game = "othello"
+                    game_started = True
+                    t = othello(player1,player2,screen,6)
+                    winner = t.run()
+                    if winner == "Menu":
+                        game_started = False
+                        game_over = False
+                        leader_board_clicked = False
+                        statistic_show = False
+                    elif winner == "Draw":
+                        text_winner = font_winner.render("It's a Draw!", True, (0,255,200))
+                    else:
+                        text_winner = font_winner.render(f"{winner} Wins!", True, (0,255,200))
+                    game_over = True
+                if medium_rect.collidepoint(mouse_pos):
+                    current_game = "othello"
+                    game_started = True
+                    t = othello(player1,player2,screen,8)
+                    winner = t.run()
+                    if winner == "Menu":
+                        game_started = False   
+                        game_over = False
+                        leader_board_clicked = False
+                        statistic_show = False
+                    elif winner == "Draw":
+                        text_winner = font_winner.render("It's a Draw!", True, (0,255,200))
+                    else:
+                        text_winner = font_winner.render(f"{winner} Wins!", True, (0,255,200))
+                        game_over = True
+                if large_rect.collidepoint(mouse_pos):
+                        current_game = "othello"
+                        game_started = True
+                        t = othello(player1,player2,screen,10)
+                        winner = t.run()
+                        if winner == "Menu":
+                            game_started = False
+                            game_over = False
+                            leader_board_clicked = False
+                            statistic_show = False
+                        elif winner == "Draw":
+                            text_winner = font_winner.render("It's a Draw!", True, (0,255,200))
+                        else:
+                            text_winner = font_winner.render(f"{winner} Wins!", True, (0,255,200))
+                        game_over = True
+                    
+                           
 
     pygame.display.update()
+
+
+
 

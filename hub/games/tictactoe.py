@@ -22,8 +22,8 @@ text = font.render("Player :",True,(0,255,200))
 
 class TicTacToe(Game):
 
-    def __init__(self, player1, player2, surface):
-        super().__init__(player1, player2, surface)      
+    def __init__(self, player1, player2, surface,n):
+        super().__init__(player1, player2, surface,n)      
         CELL_SIZE = 50
         self.CELL_SIZE = 50
         self.SPACE = 6         # gap between cells

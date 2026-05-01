@@ -3,7 +3,7 @@ from datetime import date
 import numpy as np
 class Game():
     
-    def __init__(self,player1,player2,surface):
+    def __init__(self,player1,player2,surface,n):
         self.player1 = player1
         self.player2 = player2
         self.surface = surface
@@ -14,6 +14,7 @@ class Game():
         self.result_saved = False
         self.today = date.today()
         self.quit_to_menu = False 
+        self.board_size = n
         self.menu_btn_rect = pygame.Rect(585, 5, 50, 30)
         pygame.init()
 

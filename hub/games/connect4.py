@@ -10,8 +10,8 @@ from numpy.lib.stride_tricks import sliding_window_view
 
 class connect4(Game):
 
-    def __init__(self, player1, player2, surface):
-        super().__init__(player1, player2, surface)
+    def __init__(self, player1, player2, surface,n):
+        super().__init__(player1, player2, surface,n)
         self.width = 640
         self.height = 640
         pygame.init()

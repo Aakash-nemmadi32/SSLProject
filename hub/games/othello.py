@@ -8,12 +8,17 @@ from datetime import date
 
 class othello(Game):
 
-    def __init__(self, player1, player2, surface):
-        super().__init__(player1, player2, surface)
+    def __init__(self, player1, player2, surface,n):
+        super().__init__(player1, player2, surface,n)
 
         # Window dimensions
-        self.width = 640
-        self.height = 640
+        self.CELL_SIZE = 68   # Pixel size of each cell
+        self.X_START   = 40   # Left offset where board begins
+        self.Y_START   = 80   # Top offset where board begins
+        self.RADIUS    = 26  
+        self.width = 224 + (2 * self.RADIUS * self.board_size)
+
+        self.height = 224 + ( 2* self.RADIUS * self.board_size)
         pygame.init()
         self.screen = pygame.display.set_mode((self.width, self.height))
 
@@ -27,13 +32,10 @@ class othello(Game):
         self.Game_Screen = pygame.Surface((self.width, self.height))
 
         # Initialize an 8x8 board (0 = empty, 1 = player1, 2 = player2)
-        self.create_board(8, 8)
+        self.create_board(self.board_size, self.board_size)
 
         # Board layout constants
-        self.CELL_SIZE = 68   # Pixel size of each cell
-        self.X_START   = 40   # Left offset where board begins
-        self.Y_START   = 80   # Top offset where board begins
-        self.RADIUS    = 26   # Radius of each piece circle
+
 
         # All 8 directions for flip detection 
         self.DIRECTIONS = [(-1,-1), (-1,0), (-1,1),
@@ -45,14 +47,16 @@ class othello(Game):
 
     def settingup_initial_pieces(self):
         """Set up the standard Othello starting position."""
-        self.board[3, 3] = 2
-        self.board[3, 4] = 1
-        self.board[4, 3] = 1
-        self.board[4, 4] = 2
+        x = self.board_size // 2
+        
+        self.board[x-1, x-1] = 2
+        self.board[x-1, x] = 1
+        self.board[x, x-1] = 1
+        self.board[x, x] = 2
 
     def _in_bounds(self, r, c):
         """Return True if (r, c) is within the 8x8 grid."""
-        return 0 <= r < 8 and 0 <= c < 8
+        return 0 <= r < self.board_size and 0 <= c < self.board_size
 
     def _flips_for_move(self, r, c, player):
         """
@@ -86,8 +90,8 @@ class othello(Game):
     def get_valid_moves(self, player):
         """Return all (row, col) positions where `player` can legally place a piece."""
         moves = []
-        for r in range(8):
-            for c in range(8):
+        for r in range(self.board_size):
+            for c in range(self.board_size):
                 if self._flips_for_move(r, c, player):
                     moves.append((r, c))
         return moves
@@ -113,8 +117,8 @@ class othello(Game):
         pygame.draw.circle(self.Game_Screen, (0, 255, 200), (370, 35), 20, 2)  # Cyan outline
 
         # --- Drawing empty cell slots (dark circles as "holes")
-        for r in range(8):
-            for c in range(8):
+        for r in range(self.board_size):
+            for c in range(self.board_size):
                 cx, cy = self._cell_center(r, c)
                 pygame.draw.circle(self.Game_Screen, (10, 60, 20), (cx, cy), self.RADIUS, 0)
 
@@ -125,8 +129,8 @@ class othello(Game):
             pygame.draw.circle(self.Game_Screen, (0, 255, 200), (cx, cy), self.RADIUS, 3)  # Cyan ring
 
         # --- Draw placed pieces on top of the slots 
-        for r in range(8):
-            for c in range(8):
+        for r in range(self.board_size):
+            for c in range(self.board_size):
                 if self.board[r, c] != 0:
                     color = self.player1_color if self.board[r, c] == 1 else self.player2_color
                     cx, cy = self._cell_center(r, c)
@@ -191,8 +195,8 @@ class othello(Game):
                     return None
 
                 # Check if a board cell was clicked
-                for r in range(8):
-                    for c in range(8):
+                for r in range(self.board_size):
+                    for c in range(self.board_size):
                         x = self.X_START + c * self.CELL_SIZE
                         y = self.Y_START + r * self.CELL_SIZE
                         if x < mx < x + self.CELL_SIZE and y < my < y + self.CELL_SIZE:
